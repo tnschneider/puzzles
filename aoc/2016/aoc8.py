@@ -7,7 +7,7 @@ DAY = 8
 def getinput(day):
 	o = urllib2.build_opener()
 	o.addheaders.append(('Cookie', \
-		'session=53616c7465645f5fd68df546740feebce15143126e6ea9d24c774f9a959b402c887d68b9ca3e5608f0758b10e0751458'))
+		'session=53616c7465645f5f542b76de74238d746ad4627f8fad420d9530fb31ccc464ecdf48edc71a05deb8bd4bcc0368fca8b9'))
 	ip = o.open('http://adventofcode.com/2016/day/' + str(day) + '/input')
 	istr = ip.read()
 	ip.close()
@@ -45,13 +45,15 @@ def rotate_col(screen, col, by):
 		screen[j][col] = newcol[j]
 	return screen
 
+screen = [ [ False for x in range(50) ] for y in range(6) ]
 
-screen = [[False] * 50] * 6
-
-screen = [[1, 2, 3, 'one'],[4, 5, 6, 'two'],[7, 8, 9, 'three'],[10, 11, 12, 'four']]
+printout(screen)
 
 inp = getinput(DAY)
+
 count = 0
+
+printout(screen)
 
 for i in inp:
 	if i[:4] == 'rect':
@@ -67,12 +69,20 @@ for i in inp:
 			screen = rotate_row(screen, int(b[0]), int(b[1]))
 		elif i[7:10] == 'col':
 			screen = rotate_col(screen, int(b[0]), int(b[1]))
+	
+	print(i)
+	print('\n')
+	printout(screen)
+	#qq = input("press any key")
 
 count = 0
 for i in range(len(screen)):
 	for j in range(len(screen[i])):
 		if screen[i][j]:
 			count += 1
+
+
+
 
 printout(screen)
 
